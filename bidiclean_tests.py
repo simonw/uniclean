@@ -15,15 +15,16 @@ bidi_tests = (
 )
 
 class BidiCleanTest(unittest.TestCase):
-    def test_naive(self):
-        for input, expected in bidi_tests:
-            actual = bidiclean.unicode_cleanup_rtl(input)
-            self.assertEqual(expected, actual)
-    
-    def test_regex(self):
-        for input, expected in bidi_tests:
-            actual = bidiclean.unicode_cleanup_rtl_regex(input)
-            self.assertEqual(expected, actual)
+    pass
+
+i = 0
+for input, expected in bidi_tests:
+    def test(self):
+        actual = bidiclean.bidiclean(input)
+        self.assertEqual(expected, actual)
+    test.__name__ = 'test_%d' % i
+    setattr(BidiCleanTest, 'test_%d' % i, test)
+    i += 1
 
 if __name__ == '__main__':
     unittest.main()
